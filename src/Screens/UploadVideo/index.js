@@ -27,6 +27,7 @@ const UploadVideo = () => {
         startDate: '',
         endDate: ''
     })
+    console.log('startDate', uploadVideo.startDate);
 
     console.log('uploadVideo', uploadVideo);
 
@@ -52,11 +53,21 @@ const UploadVideo = () => {
             setUploadProgress(progress);
             getDownloadURL(storageRef).then((downloadURL) => {
                 setUploadVideo({ ...uploadVideo, videoLink: downloadURL })
-                console.log('File available at', downloadURL);
+                // console.log('File available at', downloadURL);
             });
         })
 
     }
+    const date = new Date();
+    let currentTime = date.getTime()
+
+    let currentDay = date.getDate()
+    let currentMonth = date.getMonth()
+    let currentYear = date.getFullYear()
+    const currenthours = Math.floor(currentTime / 3600000);
+    const currentminutes = Math.floor((currentTime % 3600000) / 60000);
+    const currentseconds = Math.floor(((currentTime % 3600000) % 60000) / 1000);
+
 
     const sendVideo = () => {
         if (uploadVideo.videoLink == "" || uploadVideo.startDate == "" || uploadVideo.endDate == "") {
@@ -75,48 +86,57 @@ const UploadVideo = () => {
         }
     }
 
-
-    // else if (uploadVideo.startDate && uploadVideo.endDate) {
-    //     console.log(typeof uploadVideo.startDate, "typeOfStart")
-    //     console.log(uploadVideo.startDate, "uploadsTART")
-    //     console.log(uploadVideo.endDate, "uploadEnd")
-
-    //     let startDate = new Date(uploadVideo.startDate.slice(0, 10))
-    //     let endDate = new Date(uploadVideo.endDate.slice(0, 10))
-
-    //     console.log(endDate, "endDate")
-    //     console.log(startDate, "startDate")
-
-    //     startDate = startDate.getTime()
-    //     endDate = endDate.getTime()
-
-    //     console.log(startDate, "start")
-    //     console.log(endDate, "end")
-    // }
-
     return (
         <>
             <div>UploadVideo</div>
             <input type="file" accept="video/mp4" onChange={handleFileInputChange} />
-            <button type="submit" onClick={handleSubmit} disabled={!selectedFile}>Upload</button>
+            <button type="submit" onClick={handleSubmit} disabled={!selectedFile}>{selectedFile ? 'Upload Successfully' : 'Upload'}</button>
             <br />
             <label for=""> Vedio Start Date And Time</label>
+
             <input
                 style={{ marginTop: "20px" }}
                 type="datetime-local"
                 id="startDateTime"
-                name="Shedule Date And Time"
-                onChange={(e) => { setUploadVideo({ ...uploadVideo, startDate: e.target.value }) }}
+                name="Schedule Date And Time"
+                value={uploadVideo.startDate}
+                min={new Date().toISOString().slice(0, 16)}
+                onChange={(e) => {
+                    const selectedDateTime = new Date(e.target.value).getTime();
+                    const currentDateTime = new Date().getTime();
+                    if (selectedDateTime < currentDateTime) {
+                        alert("Please select a current or future date and time.");
+                    } else {
+                        setUploadVideo({
+                            ...uploadVideo,
+                            startDate: e.target.value,
+                        });
+                    }
+                }}
             />
             <br />
             <label for=""> Vedio End Date And Time </label>
             <input
                 style={{ marginTop: "20px" }}
                 type="datetime-local"
-                id="endDateTime"
-                name="Shedule Date And Time"
-                onChange={(e) => { setUploadVideo({ ...uploadVideo, endDate: e.target.value }) }}
+                id="startDateTime"
+                name="Schedule Date And Time"
+                value={uploadVideo.endDate}
+                min={new Date().toISOString().slice(0, 16)}
+                onChange={(e) => {
+                    const selectedDateTime = new Date(e.target.value).getTime();
+                    const currentDateTime = new Date().getTime();
+                    if (selectedDateTime < currentDateTime) {
+                        alert("Please select a current or future date and time.");
+                    } else {
+                        setUploadVideo({
+                            ...uploadVideo,
+                            endDate: e.target.value,
+                        });
+                    }
+                }}
             />
+
             <br />
 
             <button type="submit" onClick={sendVideo}>Submit</button>
