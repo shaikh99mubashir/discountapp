@@ -6,6 +6,7 @@ import {
     onAuthStateChanged,
 } from "firebase/auth";
 import app from "../../FirebaseConfig/Config";
+import ReactPlayer from 'react-player'
 import {
     getDatabase,
     onValue,
@@ -15,6 +16,9 @@ import {
     update,
     remove,
 } from "firebase/database";
+// import Button from 'react-bootstrap';
+import { Form, Table, Button } from 'react-bootstrap';
+import Slidebar from '../Slidebar';
 
 const UploadVideo = () => {
     const [selectedFile, setSelectedFile] = useState(null);
@@ -37,9 +41,9 @@ const UploadVideo = () => {
             setVideoData(data);
         });
     }, []);
-    console.log('videoData', videoData);
 
     const [uploadVideo, setUploadVideo] = useState({
+        videoName: '',
         videoLink: '',
         startDate: '',
         endDate: ''
@@ -74,81 +78,19 @@ const UploadVideo = () => {
         })
 
     }
-    // useEffect(() => {
-    //     videoData.some((scheduledVideo) => {
-    //         let startDate = new Date(scheduledVideo.startDate)
-    //         let endDate = new Date(scheduledVideo.endDate)
-    //         console.log(startDate, "startDate======>")
-    //         console.log('endDate=======>', endDate);
-    //         let startDayDifference = startDate.getDate()
-    //         let startMonthDifference = startDate.getMonth()
-    //         let startYear = startDate.getFullYear()
-    //         let startHour = startDate.getHours()
-    //         let startMin = startDate.getMinutes()
-
-    //         let userSelectedStartDay = uploadVideo.startDate.getDate()
-    //         let userSelectedStartMonth = uploadVideo.startDate.getMonth()
-    //         let userSelectedStartYear = uploadVideo.startDate.getFullYear()
-    //         let userSelectedStartHour = uploadVideo.startDate.getHours()
-    //         let userSelectedStartMin = uploadVideo.startDate.getMinutes()
-
-    //         let endDayDifference = endDate.getDate()
-    //         let endMonthDifference = endDate.getMonth()
-    //         let endYear = endDate.getFullYear()
-    //         let endHour = endDate.getHours()
-    //         let endMin = endDate.getMinutes()
-
-    //         let userSelectedEndDay   = uploadVideo.endDate.getDate()
-    //         let userSelectedEndMonth = uploadVideo.endDate.getMonth()
-    //         let userSelectuserSelectedEndMonthedEndYear  = uploadVideo.endDate.getFullYear()
-    //         let userSelectedEndHour  = uploadVideo.endDate.getHours()
-    //         let userSelectedEndMin  = uploadVideo.endDate.getMinutes()
-
-
-
-    //         console.log('uploadVideo.startDate', uploadVideo.startDate);
-    //         console.log('uploadVideo.startDate', uploadVideo.endDate);
-    //         console.log('scheduledVideo', scheduledVideo);
-    //         const startTime = new Date(scheduledVideo.startDate).getTime();
-    //         const endTime = new Date(scheduledVideo.endDate).getTime();
-    //         // console.log('startYime', startTime);
-    //         return uploadVideo.startDate >= startTime && uploadVideo.startDate <= endTime;
-    //     });
-    // }, [uploadVideo.startDate])
 
     const sendVideo = () => {
 
+
         const isOverlap = videoData.length > 0 && videoData.every((scheduledVideo) => {
+
             let startDate = new Date(scheduledVideo.startDate)
             let endDate = new Date(scheduledVideo.endDate)
             let userStartDate = new Date(uploadVideo?.startDate)
             let userEndDate = new Date(uploadVideo.endDate)
-            console.log(startDate, "startDate======>")
-            console.log('endDate=======>', endDate);
-            let startDayDifference = startDate.getDate()
-            let startMonthDifference = startDate.getMonth()
-            let startYear = startDate.getFullYear()
-            let startHour = startDate.getHours()
-            let startMin = startDate.getMinutes()
-
-            let userSelectedStartDay = userStartDate.getDate()
-            let userSelectedStartMonth = userStartDate.getMonth()
-            let userSelectedStartYear = userStartDate.getFullYear()
-            let userSelectedStartHour = userStartDate.getHours()
-            let userSelectedStartMin = userStartDate.getMinutes()
-
-            let endDayDifference = endDate.getDate()
-            let endMonthDifference = endDate.getMonth()
-            let endYear = endDate.getFullYear()
-            let endHour = endDate.getHours()
-            let endMin = endDate.getMinutes()
-
-            let userSelectedEndDay = userEndDate.getDate()
-            let userSelectedEndMonth = userEndDate.getMonth()
-            let userSelectuserEndYear = userEndDate.getFullYear()
-            let userSelectedEndHour = userEndDate.getHours()
-            let userSelectedEndMin = userEndDate.getMinutes()
-            return userStartDate >= startDate && userStartDate <= endDate
+            let startTime = userStartDate.getTime()
+            let endTime = endDate.getTime()
+            return startTime < endTime
         });
 
         console.log(isOverlap, 'isOverlapisOverlapisOverlapisOverlap');
@@ -164,6 +106,7 @@ const UploadVideo = () => {
             const reference = dbRef(db, `videolink/`)
             push(reference, uploadVideo).then(() => {
                 alert('Successfully Scheduled!')
+                uploadVideo.videoName = ""
                 uploadVideo.videoLink = ""
                 uploadVideo.startDate = ""
                 uploadVideo.endDate = ""
@@ -173,61 +116,125 @@ const UploadVideo = () => {
         }
     }
 
+    const deleteVideoLink = (id, i) => {
+        const deleteLink = dbRef(db, `videolink/${id}`);
+        remove(deleteLink)
+            .then((deleted) => {
+                console.log("successfully deleted");
+            })
+            .catch((err) => console.log("GOT THE ERROR ON DELETE", err));
+        console.log('id', id);
+        // setVideoData(videoData.filter((item, index) => {
+        //     return index !== i;
+        // }))
+
+    }
+
 
     return (
         <>
-            <div>UploadVideo</div>
-            <input type="file" accept="video/mp4" onChange={handleFileInputChange} />
-            <button type="submit" onClick={handleSubmit} disabled={!selectedFile}>{uploadVideo.videoLink ? 'Upload Successfully' : 'Upload'}</button>
-            <br />
-            <label for=""> Vedio Start Date And Time</label>
+            <Slidebar title='Schedule Video' style={{ color: "#d47617", fontSize: 30, fontWeight: 'bold' }} />
+            <div class="row">
+                <div class="col-lg-4">
+                    <div style={{ marginTop: 40, border: '1px solid white', borderRadius: 5, padding: 30 }}>
+                        <div style={{ color: '#222536' }}>Video Name</div>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <input className="form__input" type='email' placeholder="Video Name" onChange={(e) => setUploadVideo({ ...uploadVideo, videoName: e.target.value, })} />
+                        </Form.Group>
+                        <div style={{ color: '#222536', }}>UploadVideo</div>
+                        <input className='form-control form__input' type="file" accept="video/mp4" onChange={handleFileInputChange} />
+                        <button className='button-sub px-4' type="submit" onClick={handleSubmit} disabled={!selectedFile}>{uploadVideo.videoLink ? 'Upload Successfully' : 'Upload'}</button>
+                        <br />
+                        <label for="" style={{ color: '#222536' }}> Vedio Start Date And Time</label>
 
-            <input
-                style={{ marginTop: "20px" }}
-                type="datetime-local"
-                id="startDateTime"
-                name="Schedule Date And Time"
-                value={uploadVideo.startDate}
-                min={new Date().toISOString().slice(0, 16)}
-                onChange={(e) => {
-                    const selectedDateTime = new Date(e.target.value).getTime();
-                    const currentDateTime = new Date().getTime();
-                    if (selectedDateTime < currentDateTime) {
-                        alert("Please select a current or future date and time.");
-                    } else {
-                        setUploadVideo({
-                            ...uploadVideo,
-                            startDate: e.target.value,
-                        });
-                    }
-                }}
-            />
-            <br />
-            <label for=""> Vedio End Date And Time </label>
-            <input
-                style={{ marginTop: "20px" }}
-                type="datetime-local"
-                id="startDateTime"
-                name="Schedule Date And Time"
-                value={uploadVideo.endDate}
-                min={new Date().toISOString().slice(0, 16)}
-                onChange={(e) => {
-                    const selectedDateTime = new Date(e.target.value).getTime();
-                    const currentDateTime = new Date().getTime();
-                    if (selectedDateTime < currentDateTime) {
-                        alert("Please select a current or future date and time.");
-                    } else {
-                        setUploadVideo({
-                            ...uploadVideo,
-                            endDate: e.target.value,
-                        });
-                    }
-                }}
-            />
+                        <input
+                            className='form-control form__input'
+                            style={{ marginTop: "5px" }}
+                            type="datetime-local"
+                            id="startDateTime"
+                            name="Schedule Date And Time"
+                            value={uploadVideo.startDate}
+                            min={new Date().toISOString().slice(0, 16)}
+                            onChange={(e) => {
+                                const selectedDateTime = new Date(e.target.value).getTime();
+                                const currentDateTime = new Date().getTime();
+                                if (selectedDateTime < currentDateTime) {
+                                    alert("Please select a current or future date and time.");
+                                } else {
+                                    setUploadVideo({
+                                        ...uploadVideo,
+                                        startDate: e.target.value,
+                                    });
+                                }
+                            }}
+                        />
 
-            <br />
+                        <label for="" style={{ color: '#222536' }}> Vedio End Date And Time </label>
+                        <input
+                            className='form-control form__input'
+                            style={{ marginTop: "5px" }}
+                            type="datetime-local"
+                            id="startDateTime"
+                            name="Schedule Date And Time"
+                            value={uploadVideo.endDate}
+                            min={new Date().toISOString().slice(0, 16)}
+                            onChange={(e) => {
+                                const selectedDateTime = new Date(e.target.value).getTime();
+                                const currentDateTime = new Date().getTime();
+                                if (selectedDateTime < currentDateTime) {
+                                    alert("Please select a current or future date and time.");
+                                } else {
+                                    setUploadVideo({
+                                        ...uploadVideo,
+                                        endDate: e.target.value,
+                                    });
+                                }
+                            }}
+                        />
 
-            <button type="submit" onClick={sendVideo}>Submit</button>
+                        <br />
+                        <button className="button-sub px-4" type="submit" onClick={sendVideo}>Submit</button>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div style={{ marginTop: 40, border: '1px solid white', borderRadius: 5, padding: 30 }}>
+                        <ReactPlayer controls url={uploadVideo.videoLink} />
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>S.no</th>
+                        <th>Video Link</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                {videoData && videoData.map((e, i) => {
+                    return (
+                        <tbody>
+                            <tr>
+                                <td>{i + 1}</td>
+                                <td>{e.videoLink}</td>
+                                <td>{e.startDate}</td>
+                                <td>{e.endDate}</td>
+                                <td><button onClick={() => deleteVideoLink(e.id, i)}>Delete</button></td>
+                            </tr>
+                        </tbody>
+                    )
+                })}
+            </Table>
         </>
     )
 }

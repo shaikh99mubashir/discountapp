@@ -7,21 +7,67 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  height: 100vh;
+  padding: 20px;
+}
+.offcanvas.offcanvas-start {
+  width: 300px !important;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+label {
+  color: white;
+  margin-top: 10px;
+}
+.btn-primary {
+  border: none !important;
+}
+.button-sub:disabled {
+  background-color: #a0a5a8 !important;
+}
+.button-sub {
+  color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  border: none !important;
+  background-color: #222536;
+}
+.button-sub:hover {
+  background-color: #d47617;
+  color: white;
+}
+.btn-primary:hover {
+  color: #d47617;
+  background: none;
+}
+.form-control {
+  width: auto !important;
+}
+#sliderIcon:hover {
+  color: #d47617 !important;
+}
+.sliderButton {
+  background-color: #222530;
+  font-weight: bold;
+  color: white;
+}
+.sliderButton:hover {
+  color: #d47617;
 }
 /**/
 .main {
   /* position: relative; */
   /* width: 1000px; */
   /* min-width: 1000px; */
-  min-height: 900px;
+  min-height: 1000px;
   align-items: center;
   /* height: 0px; */
   /* padding: 25px; */
   background-color: #ecf0f3;
-  box-shadow: 10px 10px 10px #d1d9e6, -10px -10px 10px #f9f9f9;
+  /* box-shadow: 10px 10px 10px #d1d9e6, -10px -10px 10px #f9f9f9; */
   border-radius: 12px;
   overflow: hidden;
   display: grid;
@@ -41,7 +87,7 @@ code {
     padding: 50px;
     z-index: 200;
     transition: 1.25s;
-    background-color: #ecf0f3;
+    background-color: #222536;
     overflow: hidden;
     box-shadow: 4px 4px 10px #d1d9e6, -4px -4px 10px #f9f9f9;
   }
@@ -130,11 +176,15 @@ code {
   font-weight: 700;
   font-size: 14px;
   letter-spacing: 1.15px;
-  background-color: #4b70e2;
-  color: #f9f9f9;
-  box-shadow: 8px 8px 16px #d1d9e6, -8px -8px 16px #f9f9f9;
+  background-color: rgb(255, 255, 255);
+  color: #d47617;
+  box-shadow: 8px 8px 16px #222536, -8px -8px 16px #222536;
   border: none;
   outline: none;
+}
+.button:hover {
+  background-color: #d47617;
+  color: #222536;
 }
 .b-container {
   display: grid;
@@ -157,9 +207,9 @@ code {
   padding: 50px;
   z-index: 200;
   transition: 1.25s;
-  background-color: #ecf0f3;
+  background-color: #222536;
   overflow: hidden;
-  box-shadow: 4px 4px 10px #d1d9e6, -4px -4px 10px #f9f9f9;
+  box-shadow: 4px 4px 10px #222530, -4px -4px 10px #222530;
 }
 .switch__circle {
   position: absolute;
@@ -192,7 +242,7 @@ code {
   cursor: pointer;
 }
 .switch__button:hover {
-  box-shadow: 6px 6px 10px #d1d9e6, -6px -6px 10px #f9f9f9;
+  box-shadow: 6px 6px 10px #d1d9e6, -6px -6px 10px #d1d9e6;
   transform: scale(0.985);
   transition: 0.25s;
 }

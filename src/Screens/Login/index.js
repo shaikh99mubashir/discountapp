@@ -11,11 +11,13 @@ import { Col, Container, Image, Row } from "react-bootstrap";
 // import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const auth = getAuth(app);
+
+    console.log(email, password)
+
     const db = getDatabase(app);
     const navigate = useNavigate();
 
@@ -31,7 +33,13 @@ const Login = () => {
                     if (user.email == 'admin@blackdollor.com') {
                         console.log('sing in successfully');
                         localStorage.setItem('UserData', JSON.stringify(user))
-                        navigate("UploadVideo");
+                        let data = {
+                            email: email,
+                            password: password,
+
+                        }
+
+                        data && navigate("Dashboard", { state: data });
                     }
                 })
                 .catch((error) => {
@@ -42,34 +50,42 @@ const Login = () => {
         });
     };
 
+    const [user, setUser] = useState('')
+    React.useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                var uid = user.uid;
+
+                setUser(uid)
+            } else {
+                navigate("/");
+            }
+        });
+    }, []);
+    console.log('user', user);
 
     return (
-        <Container fluid style={{ background: "#ecf0f3" }}>
-            <div className="main">
-                <Container className="b-container">
+        <Container fluid style={{ background: "#222536" }}>
+            <div className="main" style={{ background: "#222536" }}>
+                <Container className="b-container" style={{ background: "#222536" }}>
                     <div>
                         <Row>
                             <Col>
                                 <div className="switch">
-                                    <div className="switch__circle"></div>
-                                    <div className="switch__circle switch__circle--t"></div>
                                     <div className="switch__container" id="switch-c1">
-                                        <h2 className="switch__title title">Welcome Back !</h2>
-                                        <p className="switch__description description">To keep connected with us please login with your personal info</p>
-                                        <button className="switch__button button switch-btn">SIGN IN</button>
+                                        <h2 className="switch__title title" style={{ color: "#d47617" }}>Welcome Back !</h2>
+                                        <p className="switch__description description" style={{ color: "#d47617" }}>When Money Talks, You Should Listen!</p>
                                     </div>
                                 </div>
                             </Col>
                             <Col>
-                                <h2 class="form_title title">Sign in to Website</h2>
+                                <h2 class="form_title title" style={{ color: 'white' }}>Sign In</h2>
                                 <div class="form__icons"></div>
-                                <span class="form__span">or use your email account</span>
-
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                                    <input className="form__input" type='email' onChange={(e) => setEmail(e.target.value)} />
+                                    <input className="form__input" type='email' placeholder="email@email.com" onChange={(e) => setEmail(e.target.value)} />
                                 </Form.Group>
 
-                                <Form.Group className="mb-3" controlId="formBasicPassword">
+                                <Form.Group className="mb-3" placeholder="*****" controlId="formBasicPassword">
                                     <input className="form__input" type='password' onChange={(e) => setPassword(e.target.value)} />
 
                                 </Form.Group>
