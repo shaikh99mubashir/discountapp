@@ -11,6 +11,40 @@ body {
   height: 100vh;
   padding: 20px;
 }
+.ved-m{
+background: gainsboro;
+    border: 1px solid white;
+    border-radius: 35px;
+    padding: 30px;
+    
+    text-align: center;
+}
+.box-shad{
+  border: 4px solid rgb(212, 118, 23);
+    /* height: 100px; */
+    background-color: rgb(180 179 177);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    margin-top: 20px;
+}
+.box-shad:hover{
+  transition-duration: 1s;
+  border: 4px solid rgb(180 179 177);
+    /* height: 100px; */
+    background-color: rgb(212, 118, 23);
+  
+}
+    .ved-m div{
+      /* background: gainsboro;
+      border: 1px solid white;
+      border-radius: 35px;
+      padding: 30px; */
+  width: auto !important;
+  height: 395px !important;
+}
 .offcanvas.offcanvas-start {
   width: 300px !important;
 }
@@ -56,9 +90,6 @@ label {
   background-color: #222530;
   font-weight: bold;
   color: white;
-}
-.sliderButton:hover {
-  color: #d47617;
 }
 /**/
 .main {
