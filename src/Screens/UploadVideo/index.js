@@ -116,20 +116,6 @@ const UploadVideo = () => {
         }
     }
 
-    const deleteVideoLink = (id, i) => {
-        const deleteLink = dbRef(db, `videolink/${id}`);
-        remove(deleteLink)
-            .then((deleted) => {
-                console.log("successfully deleted");
-            })
-            .catch((err) => console.log("GOT THE ERROR ON DELETE", err));
-        console.log('id', id);
-        // setVideoData(videoData.filter((item, index) => {
-        //     return index !== i;
-        // }))
-
-    }
-
 
     return (
         <>
@@ -204,37 +190,6 @@ const UploadVideo = () => {
                 <div class="col-lg-4">
                 </div>
             </div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>S.no</th>
-                        <th>Video Link</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                {videoData && videoData.map((e, i) => {
-                    return (
-                        <tbody>
-                            <tr>
-                                <td>{i + 1}</td>
-                                <td>{e.videoLink}</td>
-                                <td>{e.startDate}</td>
-                                <td>{e.endDate}</td>
-                                <td><button onClick={() => deleteVideoLink(e.id, i)}>Delete</button></td>
-                            </tr>
-                        </tbody>
-                    )
-                })}
-            </Table>
         </>
     )
 }

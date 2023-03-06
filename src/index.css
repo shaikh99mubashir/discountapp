@@ -43,9 +43,12 @@ label {
   color: #d47617;
   background: none;
 }
-.form-control {
+.video div {
   width: auto !important;
 }
+/* .form-control {
+  width: auto !important;
+} */
 #sliderIcon:hover {
   color: #d47617 !important;
 }
@@ -100,7 +103,6 @@ label {
   width: 600px;
   height: 100%;
   padding: 25px;
-  background-color: #ecf0f3;
   transition: 1.25s;
 }
 

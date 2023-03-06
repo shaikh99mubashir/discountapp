@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { BrowserRouter, useNavigate, Route, Routes } from 'react-router-dom'
 import Dashboard from '../Screens/Dashboard'
 import Login from '../Screens/Login'
+import Marquee from '../Screens/Marquee'
 import PushNotification from '../Screens/PushNotification'
 import ScheduledVideoList from '../Screens/ScheduledVideoList'
 import Setting from '../Screens/Setting'
@@ -20,6 +21,7 @@ const Routing = () => {
                 <Route path='PushNotification' element={<PushNotification />} />
                 <Route path='Setting' element={<Setting />} />
                 <Route path='Support' element={<Support />} />
+                <Route path='Marquee' element={<Marquee />} />
                 <Route path='UpdatePassword' element={<UpdatePassword />} />
             </Routes>
         </BrowserRouter>

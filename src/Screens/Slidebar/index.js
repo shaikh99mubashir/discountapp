@@ -68,16 +68,17 @@ const Slidebar = (props) => {
 
                             </div>
                         </Link>
-                        <div onClick={handleNavigation} style={{ textDecoration: 'none' }}>
-                            <div style={{ marginBottom: 20 }}>
-                                <button className='sliderButton' style={{ width: '100%', display: 'flex', alignItems: 'flex-start', alignItems: 'center', gap: 10, borderRadius: 5 }}> <AiFillPushpin id='sliderIcon' color='white' size={20} /><span style={{ fontSize: 20 }}>Push Notification</span> </button>
+                        <Link to='/PushNotification' style={{ textDecoration: 'none' }}>
+                            <div onClick={handleNavigation} style={{ textDecoration: 'none' }}>
+                                <div style={{ marginBottom: 20 }}>
+                                    <button className='sliderButton' style={{ width: '100%', display: 'flex', alignItems: 'flex-start', alignItems: 'center', gap: 10, borderRadius: 5 }}> <AiFillPushpin id='sliderIcon' color='white' size={20} /><span style={{ fontSize: 20 }}>Push Notification</span> </button>
 
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                         <Link to='/Setting' style={{ textDecoration: 'none' }}>
                             <div style={{ marginBottom: 20 }}>
                                 <button className='sliderButton' style={{ width: '100%', display: 'flex', alignItems: 'flex-start', alignItems: 'center', gap: 10, borderRadius: 5 }}> <AiFillSetting id='sliderIcon' color='white' size={20} /><span style={{ fontSize: 20 }}>Setting</span> </button>
-
                             </div>
                         </Link>
                         <Link to='/Support' style={{ textDecoration: 'none' }}>
@@ -85,17 +86,16 @@ const Slidebar = (props) => {
                                 <button className='sliderButton' style={{ width: '100%', display: 'flex', alignItems: 'flex-start', alignItems: 'center', gap: 10, borderRadius: 5 }}> <MdOutlineContactSupport id='sliderIcon' color='white' size={20} /><span style={{ fontSize: 20 }}>Support</span> </button>
                             </div>
                         </Link>
+                        <Link to='/Marquee' style={{ textDecoration: 'none' }}>
+                            <div style={{ marginBottom: 20 }}>
+                                <button className='sliderButton' style={{ width: '100%', display: 'flex', alignItems: 'flex-start', alignItems: 'center', gap: 10, borderRadius: 5 }}> <MdOutlineContactSupport id='sliderIcon' color='white' size={20} /><span style={{ fontSize: 20 }}>Marquee</span> </button>
+                            </div>
+                        </Link>
                     </div>
-
 
                     <div onClick={logoutUser} style={{ marginBottom: 20 }}>
                         <button className='sliderButton' style={{ width: '100%', display: 'flex', alignItems: 'flex-start', alignItems: 'center', gap: 10, borderRadius: 5 }}> <GoSignOut id='sliderIcon' color='white' size={20} /><span style={{ fontSize: 20 }}>Sign Out</span> </button>
                     </div>
-
-
-
-
-
                 </Offcanvas.Body>
             </Offcanvas>
         </>
