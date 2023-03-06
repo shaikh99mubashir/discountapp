@@ -24,6 +24,7 @@ const UploadVideo = () => {
   const db = getDatabase(app);
 
   const [videoData, setVideoData] = useState([]);
+  const [isLoader, setIsLoader] = useState(false);
   React.useEffect(() => {
     const getData = dbRef(db, `videolink/`);
     onValue(getData, (e) => {
@@ -59,6 +60,8 @@ const UploadVideo = () => {
   function handleSubmit(event) {
     event.preventDefault();
     // Create a storage reference
+    setIsLoader(true);
+
     const storage = getStorage();
     const storageRef = ref(storage, "videos/" + selectedFile.name);
     // Upload the file to Firebase Storage
@@ -69,6 +72,7 @@ const UploadVideo = () => {
       setUploadProgress(progress);
       getDownloadURL(storageRef).then((downloadURL) => {
         setUploadVideo({ ...uploadVideo, videoLink: downloadURL });
+        setIsLoader(false);
         // console.log('File available at', downloadURL);
       });
     });
@@ -225,7 +229,11 @@ const UploadVideo = () => {
           </div>
           <div class="col-lg-6">
             <div className="ved-m">
-              <img src={Loader} style={{ width: 30, height: 30 }} />
+              {isLoader ? (
+                <img src={Loader} style={{ width: 30, height: 30 }} />
+              ) : (
+                ""
+              )}
               <ReactPlayer controls url={uploadVideo.videoLink} />
             </div>
           </div>

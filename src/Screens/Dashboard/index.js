@@ -43,7 +43,7 @@ const Dashboard = () => {
                     }}
                   >
                     {" "}
-                    <RxDashboard id="sliderIcon" color="white" size={30} />
+                    <RxDashboard id="sliderIcon" color="white" size={40} />
                     <span style={{ fontSize: 20 }}>Dashboard</span>{" "}
                   </button>
                 </div>
@@ -66,7 +66,7 @@ const Dashboard = () => {
                     }}
                   >
                     {" "}
-                    <AiFillSchedule id="sliderIcon" color="white" size={30} />
+                    <AiFillSchedule id="sliderIcon" color="white" size={40} />
                     <span style={{ fontSize: 20 }}>
                       Scheduled New Video
                     </span>{" "}
@@ -94,7 +94,7 @@ const Dashboard = () => {
                     <AiOutlineOrderedList
                       id="sliderIcon"
                       color="white"
-                      size={30}
+                      size={40}
                     />
                     <span style={{ fontSize: 20 }}>Scheduled Video List</span>{" "}
                   </button>
@@ -119,7 +119,7 @@ const Dashboard = () => {
                       }}
                     >
                       {" "}
-                      <AiFillPushpin id="sliderIcon" color="white" size={20} />
+                      <AiFillPushpin id="sliderIcon" color="white" size={40} />
                       <span style={{ fontSize: 20 }}>
                         Push Notification
                       </span>{" "}
@@ -145,7 +145,7 @@ const Dashboard = () => {
                     }}
                   >
                     {" "}
-                    <AiFillSetting id="sliderIcon" color="white" size={20} />
+                    <AiFillSetting id="sliderIcon" color="white" size={40} />
                     <span style={{ fontSize: 20 }}>Setting</span>{" "}
                   </button>
                 </div>
@@ -171,7 +171,7 @@ const Dashboard = () => {
                     <MdOutlineContactSupport
                       id="sliderIcon"
                       color="white"
-                      size={20}
+                      size={40}
                     />
                     <span style={{ fontSize: 20 }}>Support</span>{" "}
                   </button>
@@ -198,7 +198,7 @@ const Dashboard = () => {
                     <MdOutlineContactSupport
                       id="sliderIcon"
                       color="white"
-                      size={20}
+                      size={40}
                     />
                     <span style={{ fontSize: 20 }}>Marquee</span>{" "}
                   </button>

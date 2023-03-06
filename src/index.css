@@ -20,22 +20,15 @@ background: gainsboro;
     text-align: center;
 }
 .box-shad{
-  border: 4px solid rgb(212, 118, 23);
+  /* border: 4px solid rgb(212, 118, 23); */
     /* height: 100px; */
-    background-color: rgb(180 179 177);
+    background-color: black;
     border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 150px;
     margin-top: 20px;
-}
-.box-shad:hover{
-  transition-duration: 1s;
-  border: 4px solid rgb(180 179 177);
-    /* height: 100px; */
-    background-color: rgb(212, 118, 23);
-  
 }
     .ved-m div{
       /* background: gainsboro;
@@ -83,13 +76,15 @@ label {
 /* .form-control {
   width: auto !important;
 } */
-#sliderIcon:hover {
-  color: #d47617 !important;
-}
+  /* #sliderIcon:hover {
+    color: #d47617 !important;
+  } */
 .sliderButton {
-  background-color: #222530;
-  font-weight: bold;
-  color: white;
+  padding: 8px;
+  border: none;
+    background-color: black;
+    /* font-weight: bold; */
+    color: white;
 }
 /**/
 .main {
@@ -106,7 +101,19 @@ label {
   overflow: hidden;
   display: grid;
 }
+@media  only screen and (max-width: 992px){
+  .form__input{
+    width: 268px !important;
+  }
+  .input-group{
+    align-items: center !important;
+  }
+  .table{
+    overflow: scroll;
+    display: block;
+  }
 
+} 
 @media (max-width: 600px) {
   .switch {
     display: none !important;
@@ -157,9 +164,10 @@ label {
   transition: 0.15s;
   cursor: pointer;
 }
+
 .form__input {
   width: 350px;
-  height: 40px;
+  height: 38px;
   margin: 4px 0;
   padding-left: 25px;
   font-size: 13px;
