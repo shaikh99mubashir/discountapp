@@ -117,6 +117,10 @@ const UploadVideo = () => {
     }
   };
 
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => {
+    setIsEnabled(previousState => !previousState);
+  };
   return (
     <>
       <Slidebar
@@ -165,7 +169,6 @@ const UploadVideo = () => {
               </button>
               <br />
               <label for="" style={{ color: "#222536" }}>
-                {" "}
                 Vedio Start Date And Time
               </label>
 
@@ -192,8 +195,7 @@ const UploadVideo = () => {
               />
 
               <label for="" style={{ color: "#222536" }}>
-                {" "}
-                Vedio End Date And Time{" "}
+                Vedio End Date And Time
               </label>
               <input
                 className="form-control form__input"
@@ -218,6 +220,12 @@ const UploadVideo = () => {
               />
 
               <br />
+
+              <Form.Check
+                type="switch"
+                id="custom-switch"
+                label="Check this switch"
+              />
               <button
                 className="button-sub px-4"
                 type="submit"
@@ -238,6 +246,7 @@ const UploadVideo = () => {
             </div>
           </div>
         </div>
+
       </Container>
     </>
   );
