@@ -101,6 +101,21 @@ label {
   overflow: hidden;
   display: grid;
 }
+.icon a {
+  padding: 7px;
+  background: white;
+  border-radius: 43px;
+  color: #ffffff00 !important;
+}
+.icon{
+  justify-content: center;
+    text-align: -webkit-center;
+    padding-top: 20px;
+}
+.icon a svg {
+  font-size: 20px;
+  color: black;
+}
 @media  only screen and (max-width: 992px){
   .form__input{
     width: 268px !important;

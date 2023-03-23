@@ -1,6 +1,7 @@
 import React from "react";
 import { Col, Container, Form, Image, Row } from "react-bootstrap";
 import Slidebar from "../Slidebar";
+import { BsFacebook, BsInstagram, BsLinkedin, BsSearch } from "react-icons/bs";
 
 const Support = () => {
   return (
@@ -44,9 +45,20 @@ const Support = () => {
           <Col lg="6" className="text-center">
             <div className="p-3">
               <Image
-                style={{ objectFit: "cover", width: "70%" }}
+                style={{ objectFit: "cover", width: "50%" }}
                 src={require("../../Images/desk_work.png")}
               />
+              <div className="d-flex gap-4 icon">
+                <a>
+                  <BsFacebook />
+                </a>
+                <a>
+                  <BsInstagram />
+                </a>
+                <a>
+                  <BsLinkedin />
+                </a>
+              </div>
             </div>
           </Col>
         </Row>
