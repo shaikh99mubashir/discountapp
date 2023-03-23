@@ -25,20 +25,53 @@ const ScheduledVideoList = () => {
       setVideoData(data);
     });
   }, []);
+  const [completedStatus, setCompletedStatus] = useState(false)
+  const [pendingStatus, setPendingStatus] = useState(false)
+  const [runningStatus, setRunningStatus] = useState(false)
+  console.log('videoData', videoData);
+  const [updatedData, setUpdatedData] = useState([])
+  // const checkStatus = () => {
+  //   let startTime;
+  //   let endTime;
+  //   const d = new Date();
+  //   let time = d.getTime();
+  //   setVideoData(videoData.map((e, i) => {
+  //     console.log("e", e);
+  //     startTime = e.startDate;
+  //     endTime = e.endDate;
+  //     if (e.videoLink) {
+  //       if (time < endTime) {
+  //         return {
+  //           ...e, completedStatus: e.completedStatus ? false : true
+  //         }
+  //       }
+  //       if (time > startTime || time > endTime) {
+  //         return {
+  //           ...e, runningStatus: e.runningStatus ? false : true
+  //         }
+  //       }
+  //       if (time > startTime) {
+  //         return {
+  //           ...e, pendingStatus: e.pendingStatus ? false : true
+  //         }
+  //       }
+  //     }
+  //   }))
+  // }
 
-  // console.log('videoData', videoData);
+  // console.log('updatedData', updatedData);
+  // useEffect(() => {
+  //   checkStatus()
+  // }, [])
 
-  let startTime;
-  let endTime;
-  const d = new Date();
-  let time = d.getTime();
-  videoData &&
-    videoData.map((e, i) => {
-      console.log("e", e);
-      startTime = e.startDate;
-      endTime = e.endDate;
-    });
-
+  //   if (endTime < d) {
+  //     return 'Completed';
+  //   } else if (start <= now && end >= now) {
+  //     return 'Watching';
+  //   } else {
+  //     return 'Future show';
+  //   }
+  // }
   // let startTime = startDate.getTime();
   // let endTime = endDate.getTime();
   // const d = new Date();
@@ -131,7 +164,7 @@ const ScheduledVideoList = () => {
                 <tbody>
                   <tr>
                     <td>{i + 1}</td>
-                    <td>{e.videoName}</td>
+                    <td>{e.videoName && e.videoName}</td>
                     <td>{e.videoLink}</td>
                     <td>status</td>
                     <td>{e.startDate}</td>

@@ -2,8 +2,15 @@ import React from "react";
 import { Col, Container, Form, Image, Row } from "react-bootstrap";
 import Slidebar from "../Slidebar";
 import { BsFacebook, BsInstagram, BsLinkedin, BsSearch } from "react-icons/bs";
+import { useForm, ValidationError } from '@formspree/react';
+import { useNavigate } from "react-router-dom";
 
 const Support = () => {
+  const navigate = useNavigate()
+  const [state, handleSubmit] = useForm("xknavvbl");
+  if (state.succeeded) {
+    return navigate('/Dashboard')
+  }
   return (
     <>
       <Slidebar
@@ -13,34 +20,50 @@ const Support = () => {
       <Container>
         <Row className="align-items-center">
           <Col lg="6">
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label className="text-black">Email address</Form.Label>
-              <Form.Control
-                className="form__input"
-                type="email"
-                placeholder="name@example.com"
+            <form onSubmit={handleSubmit}>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label className="text-black">Subject</Form.Label>
+                <Form.Control
+                  className="form__input"
+                  type="subject"
+                  placeholder="Title"
+                  id="subject"
+                  name="subject"
+                />
+              </Form.Group>
+              <ValidationError
+                prefix="Subject"
+                field="subject"
+                errors={state.errors}
               />
-            </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Label className="text-black">Example textarea</Form.Label>
-              <Form.Control
-                className="form__input"
-                placeholder="message...."
-                as="textarea"
-                rows={3}
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlTextarea1"
+              >
+                <Form.Label className="text-black">Example textarea</Form.Label>
+                <Form.Control
+                  className="form__input"
+                  placeholder="message...."
+                  as="textarea"
+                  rows={3}
+                  id="message"
+                  name="message"
+                />
+              </Form.Group>
+              <ValidationError
+                prefix="Message"
+                field="message"
+                errors={state.errors}
               />
-            </Form.Group>
 
-            <button
-              className="button-sub px-4"
-              type="submit"
+              <button
+                className="button-sub px-4"
+                type="submit"
               //   onClick={() => updatePass(newPassword)}
-            >
-              Submit
-            </button>
+              >
+                Submit
+              </button>
+            </form>
           </Col>
           <Col lg="6" className="text-center">
             <div className="p-3">

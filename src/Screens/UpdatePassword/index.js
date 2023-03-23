@@ -83,7 +83,7 @@ const UpdatePassword = (props) => {
   });
   return (
     <>
-      <div>UpdatePassword</div>
+      {/* <div>UpdatePassword</div> */}
       <Container
         style={{
           marginTop: 20,
