@@ -49,14 +49,14 @@ const Support = () => {
                 src={require("../../Images/desk_work.png")}
               />
               <div className="d-flex gap-4 icon">
-                <a>
-                  <BsFacebook />
+                <a href="https://www.facebook.com/deskworksol/">
+                  <BsFacebook style={{ color: "#1196f5" }} />
                 </a>
-                <a>
-                  <BsInstagram />
+                <a href="https://www.instagram.com/deskworksol/?hl=en">
+                  <BsInstagram className="insta" />
                 </a>
-                <a>
-                  <BsLinkedin />
+                <a href="https://www.linkedin.com/company/deskworksol/mycompany/">
+                  <BsLinkedin className="linkedin" />
                 </a>
               </div>
             </div>

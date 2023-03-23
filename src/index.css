@@ -7,10 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-#root {
+/* #root {
   height: 100vh;
   padding: 20px;
-}
+} */
 .ved-m{
 background: gainsboro;
     border: 1px solid white;
@@ -91,7 +91,7 @@ label {
   /* position: relative; */
   /* width: 1000px; */
   /* min-width: 1000px; */
-  min-height: 1000px;
+  min-height: 100vh;
   align-items: center;
   /* height: 0px; */
   /* padding: 25px; */
@@ -102,7 +102,7 @@ label {
   display: grid;
 }
 .icon a {
-  padding: 7px;
+  padding: 4px;
   background: white;
   border-radius: 43px;
   color: #ffffff00 !important;
@@ -112,9 +112,28 @@ label {
     text-align: -webkit-center;
     padding-top: 20px;
 }
+.insta{
+  display: inline-block;
+  /* width: 250px; */
+  /* height: 250px; */
+  text-align: center;
+  border-radius: 5px;
+  padding: 2px;
+  color: #fff !important;
+  font-size: 220px;
+  line-height: 250px;
+  vertical-align: middle;
+  background: #d6249f;
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+  box-shadow: 0px 3px 10px rgba(0,0,0,.25);
+}
+.linkedin{
+  background: white;
+  color: #1565c0;
+  
+}
 .icon a svg {
-  font-size: 20px;
-  color: black;
+  font-size: 28px;
 }
 @media  only screen and (max-width: 992px){
   .form__input{

@@ -3,16 +3,8 @@ import Slidebar from "../Slidebar";
 import ReactPlayer from "react-player";
 import app from "../../FirebaseConfig/Config";
 import Modal from "react-bootstrap/Modal";
-import {
-  getDatabase,
-  onValue,
-  ref as dbRef,
-  push,
-  set,
-  update,
-  remove,
-} from "firebase/database";
-import { Form, Table, Button, Container } from "react-bootstrap";
+import { getDatabase, onValue, ref as dbRef, remove } from "firebase/database";
+import { Table, Button, Container } from "react-bootstrap";
 import { BsEyeFill } from "react-icons/bs";
 import { AiFillDelete } from "react-icons/ai";
 
@@ -33,6 +25,39 @@ const ScheduledVideoList = () => {
       setVideoData(data);
     });
   }, []);
+
+  // console.log('videoData', videoData);
+
+  let startTime;
+  let endTime;
+  const d = new Date();
+  let time = d.getTime();
+  videoData &&
+    videoData.map((e, i) => {
+      console.log("e", e);
+      startTime = e.startDate;
+      endTime = e.endDate;
+    });
+
+  // let startTime = startDate.getTime();
+  // let endTime = endDate.getTime();
+  // const d = new Date();
+  // let time = d.getTime();
+
+  // if (dbItems.length == 0) {
+  //   console.log(time, 'time');
+  //   console.log(endTime, 'END');
+  //   console.log(startTime, 'StartTime');
+  //   if (time < endTime) {
+  //     if (time > startTime) {
+  //       console.log('heelo');
+  //       finalE.push(e);
+  //     }
+  //   }
+
+  //   console.log(finalE, '=== finalE ===');
+  //   setDBItems(finalE);
+  // }
 
   const deleteVideoLink = (id, i) => {
     const deleteLink = dbRef(db, `videolink/${id}`);
