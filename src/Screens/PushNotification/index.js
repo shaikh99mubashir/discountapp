@@ -89,21 +89,6 @@ const PushNotification = () => {
 
           </Form.Group>
         </Col>
-        {/* <Col lg="12">
-          <div style={{ color: "#222536" }}></div>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-
-            <input
-              className="form-control form__input"
-              maxlength="25"
-              placeholder="Push Notification"
-              value={pushNotification.pushNotificationTitle}
-              onChange={(e) => setPushNotification(e.target.value)}
-            />
-
-          </Form.Group>
-        </Col> */}
-
         <button
           className="button-sub px-4"
           type="submit"
