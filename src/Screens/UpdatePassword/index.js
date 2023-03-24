@@ -65,16 +65,9 @@ const UpdatePassword = (props) => {
     setCurrentUser(authCor);
   }, []);
 
-  console.log(currentUser, "current");
-
-  console.log(auth, "auth");
 
   const email = auth && auth.currentUser;
 
-  // const credentials = auth.EmailAuthProvider.credential(email, oldPassword);
-  console.log("user===>", user);
-  console.log("email===>", email);
-  // console.log('credentials===>', credentials);
   const [newPassword, setNewPassword] = useState({
     oldPassword: "",
     newPassword: "",

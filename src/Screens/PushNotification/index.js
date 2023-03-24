@@ -1,56 +1,72 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slidebar from "../Slidebar";
 import { Form, Table, Button, Container, Col } from "react-bootstrap";
+import app from "../../FirebaseConfig/Config";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { AiFillDelete } from "react-icons/ai";
+import {
+  getDatabase,
+  onValue,
+  ref as dbRef,
+  push,
+  set,
+  update,
+  remove,
+} from "firebase/database";
+import { useNavigate, useNavigation } from "react-router-dom";
 
 const PushNotification = () => {
-  const LimitedWordTextarea = ({ rows, cols, value, limit }) => {
-    const [{ content, wordCount }, setContent] = React.useState({
-      content: value,
-      wordCount: 0,
-    });
+  const db = getDatabase(app);
+  const initialData = {
+    pushNotificationTitle: '',
+    pushNotificationText: '',
+  }
+  const [pushNotification, setPushNotification] = useState(initialData);
+  const navigate = useNavigate()
+  const handlePushNotification = () => {
+    const reference = dbRef(db, `PushNotification/`);
+    push(reference, pushNotification)
+      .then(() => {
+        alert("Submit Successfully!");
+        setPushNotification(initialData)
 
-    const setFormattedContent = React.useCallback(
-      (text) => {
-        let words = text.split(" ").filter(Boolean);
-        if (words.length > limit) {
-          setContent({
-            content: words.slice(0, limit).join(" "),
-            wordCount: limit,
-          });
-        } else {
-          setContent({ content: text, wordCount: words.length });
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }
+
+  const [pushNotificationData, setPushNotificationData] = useState([])
+  useEffect(() => {
+    const getData = dbRef(db, `PushNotification/`);
+    onValue(getData, (e) => {
+      const val = e.val();
+      const valData = []
+      const data = Object.entries(val).map(([key, value]) => {
+        return {
+          data: value,
+          id: key
         }
-      },
-      [limit, setContent]
-    );
 
-    React.useEffect(() => {
-      setFormattedContent(content);
-    }, []);
-    return (
-      <>
-        <input
-          className="form-control form__input"
-          type="email"
-          //   maxlength="10"
-          rows={rows}
-          cols={cols}
-          placeholder="Video Name"
-          onChange={(event) => setFormattedContent(event.target.value)}
-          value={content}
-        />
-        {/* <textarea
-          rows={rows}
-          cols={cols}
-          onChange={(event) => setFormattedContent(event.target.value)}
-          value={content}
-        /> */}
-        <p style={{ float: "right" }}>
-          {wordCount}/{limit}
-        </p>
-      </>
+      });
+      setPushNotificationData(data);
+    });
+  }, []);
+
+  const deletePushNotificationData = (id, i) => {
+    const deleteLink = dbRef(db, `PushNotification/${id}`);
+    remove(deleteLink)
+      .then((deleted) => {
+        alert("successfully deleted");
+      })
+      .catch((err) => alert("GOT THE ERROR ON DELETE", err));
+    setPushNotificationData(
+      pushNotificationData.filter((item, index) => {
+        return index !== i;
+      })
     );
-  };
+  }
+
   return (
     <>
       <Slidebar
@@ -60,35 +76,74 @@ const PushNotification = () => {
 
       <Container>
         <Col lg="12">
-          <div style={{ color: "#222536" }}>Send Notification to users</div>
+          <div style={{ color: "#222536" }}></div>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <LimitedWordTextarea limit={5} value="Hello there!" />
-            {/* <input
+
+            <input
               className="form-control form__input"
-              type="email"
-              maxlength="10"
-              placeholder="Video Name"
-            /> */}
+              maxlength="25"
+              placeholder="Push Notification"
+              value={pushNotification.pushNotificationText}
+              onChange={(e) => setPushNotification(e.target.value)}
+            />
+
           </Form.Group>
         </Col>
-        <Table style={{ marginTop: 20 }} striped bordered hover>
-          <thead>
-            <tr>
-              <th>S.no</th>
-              <th>Date / Time</th>
-            </tr>
-          </thead>
+        {/* <Col lg="12">
+          <div style={{ color: "#222536" }}></div>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
 
-          <tbody>
-            <tr>
-              <td>none</td>
+            <input
+              className="form-control form__input"
+              maxlength="25"
+              placeholder="Push Notification"
+              value={pushNotification.pushNotificationTitle}
+              onChange={(e) => setPushNotification(e.target.value)}
+            />
 
-              <td style={{ textAlign: "-webkit-center" }}>
-                <td>date</td>
-              </td>
-            </tr>
-          </tbody>
-        </Table>
+          </Form.Group>
+        </Col> */}
+
+        <button
+          className="button-sub px-4"
+          type="submit"
+          onClick={handlePushNotification}
+        >
+          Submit
+        </button>
+
+        {pushNotificationData &&
+          <Table style={{ marginTop: 20 }} striped bordered hover>
+            <thead>
+              <tr>
+                <th>S.no</th>
+                <th>Headline</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+
+            {pushNotificationData.map((e, i) => {
+              return (
+                <tbody>
+                  <tr>
+                    <td>{i + 1}</td>
+                    <td>{e.data}</td>
+
+                    <td style={{ textAlign: "-webkit-center" }}>
+                      <button
+                        style={{ border: "none" }}
+                        onClick={() => deletePushNotificationData(e.id, i)}
+                      >
+                        <AiFillDelete size={25} />
+                      </button>
+                    </td>
+
+                  </tr>
+                </tbody>
+              );
+            })}
+          </Table>
+        }
       </Container>
     </>
   );

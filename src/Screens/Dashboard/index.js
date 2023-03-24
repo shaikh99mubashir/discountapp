@@ -16,7 +16,6 @@ import { RxDashboard } from "react-icons/rx";
 
 const Dashboard = () => {
   const location = useLocation();
-  console.log(location, "location");
   const { state } = location;
 
   return (
@@ -42,7 +41,6 @@ const Dashboard = () => {
                       borderRadius: 5,
                     }}
                   >
-                    {" "}
                     <RxDashboard id="sliderIcon" color="white" size={40} />
                     <span style={{ fontSize: 20 }}>Dashboard</span>{" "}
                   </button>
@@ -65,11 +63,10 @@ const Dashboard = () => {
                       borderRadius: 5,
                     }}
                   >
-                    {" "}
                     <AiFillSchedule id="sliderIcon" color="white" size={40} />
                     <span style={{ fontSize: 20 }}>
                       Scheduled New Video
-                    </span>{" "}
+                    </span>
                   </button>
                 </div>
               </Link>
@@ -90,7 +87,6 @@ const Dashboard = () => {
                       borderRadius: 5,
                     }}
                   >
-                    {" "}
                     <AiOutlineOrderedList
                       id="sliderIcon"
                       color="white"
@@ -118,11 +114,10 @@ const Dashboard = () => {
                         borderRadius: 5,
                       }}
                     >
-                      {" "}
                       <AiFillPushpin id="sliderIcon" color="white" size={40} />
                       <span style={{ fontSize: 20 }}>
                         Push Notification
-                      </span>{" "}
+                      </span>
                     </button>
                   </div>
                 </div>
@@ -144,7 +139,6 @@ const Dashboard = () => {
                       borderRadius: 5,
                     }}
                   >
-                    {" "}
                     <AiFillSetting id="sliderIcon" color="white" size={40} />
                     <span style={{ fontSize: 20 }}>Setting</span>{" "}
                   </button>
@@ -167,7 +161,6 @@ const Dashboard = () => {
                       borderRadius: 5,
                     }}
                   >
-                    {" "}
                     <MdOutlineContactSupport
                       id="sliderIcon"
                       color="white"
@@ -194,7 +187,6 @@ const Dashboard = () => {
                       borderRadius: 5,
                     }}
                   >
-                    {" "}
                     <MdOutlineContactSupport
                       id="sliderIcon"
                       color="white"

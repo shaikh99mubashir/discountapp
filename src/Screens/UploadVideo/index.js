@@ -46,7 +46,6 @@ const UploadVideo = () => {
     endDate: "",
   });
 
-  console.log("uploadVideo", uploadVideo);
 
   function handleFileInputChange(event) {
     const file = event.target.files[0];
@@ -66,14 +65,12 @@ const UploadVideo = () => {
     const storageRef = ref(storage, "videos/" + selectedFile.name);
     // Upload the file to Firebase Storage
     const uploadTask = uploadBytes(storageRef, selectedFile);
-    console.log("upload", uploadTask);
     uploadTask.then((snapshot) => {
       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       setUploadProgress(progress);
       getDownloadURL(storageRef).then((downloadURL) => {
         setUploadVideo({ ...uploadVideo, videoLink: downloadURL });
         setIsLoader(false);
-        // console.log('File available at', downloadURL);
       });
     });
   }
@@ -91,7 +88,6 @@ const UploadVideo = () => {
         return startTime < endTime;
       });
 
-    console.log(isOverlap, "isOverlapisOverlapisOverlapisOverlap");
 
     if (isOverlap) {
       alert("The selected time overlaps with an existing scheduled video.");
@@ -112,7 +108,7 @@ const UploadVideo = () => {
           uploadVideo.endDate = "";
         })
         .catch((err) => {
-          console.log(err);
+          alert(err);
         });
     }
   };
@@ -221,11 +217,11 @@ const UploadVideo = () => {
 
               <br />
 
-              <Form.Check
+              {/* <Form.Check
                 type="switch"
                 id="custom-switch"
                 label="Check this switch"
-              />
+              /> */}
               <button
                 className="button-sub px-4"
                 type="submit"

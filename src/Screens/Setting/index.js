@@ -44,12 +44,9 @@ const Setting = () => {
       return;
     }
 
-    console.log(currentUser.email, "email");
-    console.log(oldPassword, "password");
     signInWithEmailAndPassword(auth, currentUser.email, oldPassword)
       .then((res) => {
         let { user } = res;
-        console.log("res", res);
         updatePassword(user, newPassword)
           .then((res) => {
             alert("passwords Update successfully");
@@ -57,8 +54,6 @@ const Setting = () => {
           .catch((error) => {
             alert("Passwrod not updated");
           });
-
-        console.log(user, "user");
       })
       .catch((error) => {
         if (error) {

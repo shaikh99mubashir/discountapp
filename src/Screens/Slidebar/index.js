@@ -17,7 +17,6 @@ import { getAuth } from "firebase/auth";
 import app from "../../FirebaseConfig/Config";
 const Slidebar = (props) => {
   const { title, style, data } = props;
-  console.log(data, "dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const handleClose = () => setShow(false);

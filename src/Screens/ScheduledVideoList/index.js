@@ -10,6 +10,7 @@ import { AiFillDelete } from "react-icons/ai";
 
 const ScheduledVideoList = () => {
   const [modalShow, setModalShow] = React.useState(false);
+  const [dataUpdated, setDataUpdated] = React.useState(false)
   const db = getDatabase(app);
   const [videoData, setVideoData] = useState([]);
   useEffect(() => {
@@ -23,83 +24,58 @@ const ScheduledVideoList = () => {
         };
       });
       setVideoData(data);
+      setDataUpdated(true)
     });
   }, []);
-  const [completedStatus, setCompletedStatus] = useState(false)
-  const [pendingStatus, setPendingStatus] = useState(false)
-  const [runningStatus, setRunningStatus] = useState(false)
-  console.log('videoData', videoData);
+
   const [updatedData, setUpdatedData] = useState([])
-  // const checkStatus = () => {
-  //   let startTime;
-  //   let endTime;
-  //   const d = new Date();
-  //   let time = d.getTime();
-  //   setVideoData(videoData.map((e, i) => {
-  //     console.log("e", e);
-  //     startTime = e.startDate;
-  //     endTime = e.endDate;
-  //     if (e.videoLink) {
-  //       if (time < endTime) {
-  //         return {
-  //           ...e, completedStatus: e.completedStatus ? false : true
-  //         }
-  //       }
-  //       if (time > startTime || time > endTime) {
-  //         return {
-  //           ...e, runningStatus: e.runningStatus ? false : true
-  //         }
-  //       }
-  //       if (time > startTime) {
-  //         return {
-  //           ...e, pendingStatus: e.pendingStatus ? false : true
-  //         }
-  //       }
-  //     }
-  //   }))
-  // }
+  const checkStatus = () => {
+    let startTime;
+    let endTime;
+    const d = new Date();
+    let time = d.getTime();
+    setVideoData(videoData.map((e, i) => {
+      let startDate = new Date(e.startDate)
+      let endDate = new Date(e.endDate)
 
-  // console.log('updatedData', updatedData);
-  // useEffect(() => {
-  //   checkStatus()
-  // }, [])
+      startTime = startDate.getTime();
+      endTime = endDate.getTime();
+      if (e.videoLink) {
+        if (time > endTime) {
+          return {
+            ...e, completedStatus: e.completedStatus = true
+          }
+        }
+        if (time > startTime && time < endTime) {
+          return {
+            ...e, runningStatus: e.runningStatus = true
+          }
+        }
+        if (time < startTime) {
+          return {
+            ...e, pendingStatus: e.pendingStatus = true
+          }
+        } else {
+          return e
+        }
+      }
+    }))
+  }
 
-  //   if (endTime < d) {
-  //     return 'Completed';
-  //   } else if (start <= now && end >= now) {
-  //     return 'Watching';
-  //   } else {
-  //     return 'Future show';
-  //   }
-  // }
-  // let startTime = startDate.getTime();
-  // let endTime = endDate.getTime();
-  // const d = new Date();
-  // let time = d.getTime();
 
-  // if (dbItems.length == 0) {
-  //   console.log(time, 'time');
-  //   console.log(endTime, 'END');
-  //   console.log(startTime, 'StartTime');
-  //   if (time < endTime) {
-  //     if (time > startTime) {
-  //       console.log('heelo');
-  //       finalE.push(e);
-  //     }
-  //   }
+  useEffect(() => {
+    dataUpdated && checkStatus()
+  }, [dataUpdated])
 
-  //   console.log(finalE, '=== finalE ===');
-  //   setDBItems(finalE);
-  // }
+
 
   const deleteVideoLink = (id, i) => {
     const deleteLink = dbRef(db, `videolink/${id}`);
     remove(deleteLink)
       .then((deleted) => {
-        console.log("successfully deleted");
+        alert("successfully deleted");
       })
-      .catch((err) => console.log("GOT THE ERROR ON DELETE", err));
-    console.log("id", id);
+      .catch((err) => alert("GOT THE ERROR ON DELETE", err));
     setVideoData(
       videoData.filter((item, index) => {
         return index !== i;
@@ -108,7 +84,6 @@ const ScheduledVideoList = () => {
   };
 
   function MyVerticallyCenteredModal(props) {
-    console.log("props", props);
     return (
       <Modal
         style={{ alignItems: "-webkit-center" }}
@@ -129,7 +104,6 @@ const ScheduledVideoList = () => {
   }
 
   const modalshow = (e) => {
-    console.log(e, "funtion e");
     if (e.clicked == true) {
       e.clicked = false;
       setModalShow(false);
@@ -158,7 +132,7 @@ const ScheduledVideoList = () => {
               <th>Delete</th>
             </tr>
           </thead>
-          {videoData &&
+          {videoData && videoData.length > 0 &&
             videoData.map((e, i) => {
               return (
                 <tbody>
@@ -166,7 +140,7 @@ const ScheduledVideoList = () => {
                     <td>{i + 1}</td>
                     <td>{e.videoName && e.videoName}</td>
                     <td>{e.videoLink}</td>
-                    <td>status</td>
+                    <td>{e.completedStatus ? 'completed' : e.runningStatus ? 'running' : e.pendingStatus ? 'pending' : ''}</td>
                     <td>{e.startDate}</td>
                     <td>{e.endDate}</td>
                     <td style={{ textAlign: "-webkit-center" }}>

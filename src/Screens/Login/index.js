@@ -15,9 +15,6 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const auth = getAuth(app);
-
-    console.log(email, password)
-
     const db = getDatabase(app);
     const navigate = useNavigate();
 
@@ -27,11 +24,8 @@ const Login = () => {
                 .then((userCredential) => {
                     const user = userCredential.user;
                     const { uid } = user
-                    console.log(uid)
-                    console.log(user)
                     const obj = [email, password];
                     if (user.email == 'admin@blackdollor.com') {
-                        console.log('sing in successfully');
                         localStorage.setItem('UserData', JSON.stringify(user))
                         let data = {
                             email: email,
@@ -62,7 +56,6 @@ const Login = () => {
             }
         });
     }, []);
-    console.log('user', user);
 
     return (
         <Container fluid style={{ background: "#222536" }}>
