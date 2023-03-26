@@ -17,7 +17,7 @@ import {
 import { Form, Table, Button, Container } from "react-bootstrap";
 import Slidebar from "../Slidebar";
 import Loader from "../../Images/loading.gif";
-const UploadVideo = () => {
+const UploadDailySale = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [ choosePhoto, setChoosePhoto] = useState(false)
@@ -123,7 +123,7 @@ const UploadVideo = () => {
   return (
     <>
       <Slidebar
-        title="Schedule Sale Info"
+        title="Upload Daily Sale"
         style={{ color: "#d47617", fontSize: 30, fontWeight: "bold" }}
       />
       <Container>
@@ -273,4 +273,4 @@ const UploadVideo = () => {
   );
 };
 
-export default UploadVideo;
+export default UploadDailySale;

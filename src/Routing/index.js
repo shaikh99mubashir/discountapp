@@ -9,6 +9,7 @@ import Setting from '../Screens/Setting'
 import Slidebar from '../Screens/Slidebar'
 import Support from '../Screens/Support'
 import UpdatePassword from '../Screens/UpdatePassword'
+import UploadDailySale from '../Screens/UploadDailySale'
 import UploadVideo from '../Screens/UploadVideo'
 const Routing = () => {
     return (
@@ -23,6 +24,7 @@ const Routing = () => {
                 <Route path='Support' element={<Support />} />
                 <Route path='Marquee' element={<Marquee />} />
                 <Route path='UpdatePassword' element={<UpdatePassword />} />
+                <Route path='UploadDailySale' element={<UploadDailySale />} />
             </Routes>
         </BrowserRouter>
     )

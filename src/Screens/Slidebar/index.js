@@ -107,9 +107,26 @@ const Slidebar = (props) => {
                     borderRadius: 5,
                   }}
                 >
-                  {" "}
                   <AiFillSchedule id="sliderIcon" color="white" size={20} />
-                  <span style={{ fontSize: 20 }}>Scheduled New Video</span>{" "}
+                  <span style={{ fontSize: 20 }}>Scheduled New Video</span>
+                </button>
+              </div>
+            </Link>
+            <Link to="/UploadDailySale" style={{ textDecoration: "none" }}>
+              <div style={{ marginBottom: 20 }}>
+                <button
+                  className="sliderButton"
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "flex-start",
+                    alignItems: "center",
+                    gap: 10,
+                    borderRadius: 5,
+                  }}
+                >
+                  <AiFillSchedule id="sliderIcon" color="white" size={20} />
+                  <span style={{ fontSize: 20 }}>Upload Daily Sale</span>
                 </button>
               </div>
             </Link>
