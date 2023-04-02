@@ -10,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Col, Container, Image, Row } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
 
-const Login = () => {
+const Signup = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const auth = getAuth(app);
@@ -37,7 +37,7 @@ const Login = () => {
                                 </div>
                             </Col>
                             <Col>
-                                <h2 class="form_title title" style={{ color: 'white' }}>Sign In</h2>
+                                <h2 class="form_title title" style={{ color: 'white' }}>Sign Up</h2>
                                 <div class="form__icons"></div>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                     <input className="form__input" type='email' placeholder="email@email.com" onChange={(e) => setEmail(e.target.value)} />
@@ -48,9 +48,9 @@ const Login = () => {
 
                                 </Form.Group>
 
-                                <button className="form__button button" onClick={loginBtnClicked}>SIGN IN</button>
-                                <Link to='/Signup' style={{textDecoration:'none'}}>
-                                <p style={{color:'white',marginTop:30}}>Don't Have Account? Signup</p>
+                                <button className="form__button button" onClick={loginBtnClicked}>SIGN UP</button>
+                                <Link to='/' style={{textDecoration:'none'}}>
+                                <p style={{color:'white',marginTop:30}}>Already Have Account? SignIn</p>
                                 </Link>
                             </Col>
                         </Row>
@@ -65,4 +65,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default Signup

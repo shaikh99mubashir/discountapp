@@ -11,6 +11,7 @@ import Support from '../Screens/Support'
 import UpdatePassword from '../Screens/UpdatePassword'
 import UploadDailySale from '../Screens/UploadDailySale'
 import UploadVideo from '../Screens/UploadVideo'
+import Signup from '../Screens/Signup'
 const Routing = () => {
     return (
         <BrowserRouter>
@@ -25,6 +26,7 @@ const Routing = () => {
                 <Route path='Marquee' element={<Marquee />} />
                 <Route path='UpdatePassword' element={<UpdatePassword />} />
                 <Route path='UploadDailySale' element={<UploadDailySale />} />
+                <Route path='Signup' element={<Signup />} />
             </Routes>
         </BrowserRouter>
     )
