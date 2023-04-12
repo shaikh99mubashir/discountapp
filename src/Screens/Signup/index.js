@@ -1,68 +1,133 @@
 import {
-    getAuth,
-    signInWithEmailAndPassword,
-    onAuthStateChanged,
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
 } from "firebase/auth";
 import app from "../../FirebaseConfig/Config";
 import { getDatabase, ref, onValue } from "firebase/database";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Col, Container, Image, Row } from "react-bootstrap";
-import Form from 'react-bootstrap/Form';
+import Form from "react-bootstrap/Form";
+import axios from "axios";
 
 const Signup = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const auth = getAuth(app);
-    const db = getDatabase(app);
-    const navigate = useNavigate();
+  const initialData ={
+    first_name:'',
+    phone_number:'',
+    email:'',
+    password:'',
+    is_approved:false
+  }
+  const [signupData, setSignupData] = useState(initialData);
+  const navigate = useNavigate()
 
-    const loginBtnClicked = () => {
-   
-    };
+  const signUpBtnClicked = () => {
+    axios
+      .post("http://localhost:5000/signup",signupData)
+      .then((success) => {
+        if(success.data.status){
+          alert(success.data.message)
+          navigate('/')
+        }
+        else{
+          alert(success.data.message)
+        }
+        setSignupData(initialData)
+      })
+      .catch((error) => {
+        console.log("error==>",error);
+      });
+  };
 
+  return (
+    <Container fluid style={{ background: "#222536" }}>
+      <div className="main" style={{ background: "#222536" }}>
+        <Container className="b-container" style={{ background: "#222536" }}>
+          <div>
+            <Row>
+              <Col>
+                <div className="switch">
+                  <div className="switch__container" id="switch-c1">
+                    <h2
+                      className="switch__title title"
+                      style={{ color: "#d47617" }}
+                    >
+                      Welcome Back !
+                    </h2>
+                    <p
+                      className="switch__description description"
+                      style={{ color: "#d47617" }}
+                    >
+                      When Money Talks, You Should Listen!
+                    </p>
+                  </div>
+                </div>
+              </Col>
+              <Col>
+                <h2 class="form_title title" style={{ color: "white" }}>
+                  Sign Up
+                </h2>
+                <div class="form__icons"></div>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <input
+                    className="form__input"
+                    type="email"
+                    placeholder="Name"
+                    value={signupData.first_name}
+                    onChange={(e) => setSignupData({...signupData, first_name:e.target.value})}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <input
+                    className="form__input"
+                    type="number"
+                    placeholder="Phone Number"
+                    value={signupData.phone_number}
+                    onChange={(e) => setSignupData({...signupData, phone_number:e.target.value})}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <input
+                    className="form__input"
+                    type="email"
+                    value={signupData.email}
+                    placeholder="email@email.com"
+                    onChange={(e) => setSignupData({...signupData, email:e.target.value})}
+                  />
+                </Form.Group>
 
-    return (
-        <Container fluid style={{ background: "#222536" }}>
-            <div className="main" style={{ background: "#222536" }}>
-                <Container className="b-container" style={{ background: "#222536" }}>
-                    <div>
-                        <Row>
-                            <Col>
-                                <div className="switch">
-                                    <div className="switch__container" id="switch-c1">
-                                        <h2 className="switch__title title" style={{ color: "#d47617" }}>Welcome Back !</h2>
-                                        <p className="switch__description description" style={{ color: "#d47617" }}>When Money Talks, You Should Listen!</p>
-                                    </div>
-                                </div>
-                            </Col>
-                            <Col>
-                                <h2 class="form_title title" style={{ color: 'white' }}>Sign Up</h2>
-                                <div class="form__icons"></div>
-                                <Form.Group className="mb-3" controlId="formBasicEmail">
-                                    <input className="form__input" type='email' placeholder="email@email.com" onChange={(e) => setEmail(e.target.value)} />
-                                </Form.Group>
+                <Form.Group
+                  className="mb-3"
+                  controlId="formBasicPassword"
+                >
+                  <input
+                  placeholder="*****"
+                    className="form__input"
+                  value={signupData.password}
+                    type="password"
+                    onChange={(e) => setSignupData({...signupData, password:e.target.value})}
+                  />
+                </Form.Group>
 
-                                <Form.Group className="mb-3" placeholder="*****" controlId="formBasicPassword">
-                                    <input className="form__input" type='password' onChange={(e) => setPassword(e.target.value)} />
-
-                                </Form.Group>
-
-                                <button className="form__button button" onClick={loginBtnClicked}>SIGN UP</button>
-                                <Link to='/' style={{textDecoration:'none'}}>
-                                <p style={{color:'white',marginTop:30}}>Already Have Account? SignIn</p>
-                                </Link>
-                            </Col>
-                        </Row>
-
-                    </div>
-
-                </Container>
-            </div>
-           
+                <button
+                  className="form__button button"
+                  onClick={signUpBtnClicked}
+                >
+                  SIGN UP
+                </button>
+                <Link to="/" style={{ textDecoration: "none" }}>
+                  <p style={{ color: "white", marginTop: 30 }}>
+                    Already Have Account? SignIn
+                  </p>
+                </Link>
+              </Col>
+            </Row>
+          </div>
         </Container>
+      </div>
+    </Container>
+  );
+};
 
-    )
-}
-
-export default Signup
+export default Signup;

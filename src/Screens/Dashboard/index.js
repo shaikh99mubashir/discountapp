@@ -50,6 +50,30 @@ const Dashboard = () => {
           </Col>
           <Col lg="3">
             <div className="box-shad">
+              <Link to="/Profile" style={{ textDecoration: "none" }}>
+                <div>
+                  <button
+                    className="sliderButton"
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      alignItems: "flex-start",
+                      alignItems: "center",
+                      gap: 10,
+                      borderRadius: 5,
+                    }}
+                  >
+                    <AiFillSchedule id="sliderIcon" color="white" size={40} />
+                    <span style={{ fontSize: 20 }}>
+                      Profile
+                    </span>
+                  </button>
+                </div>
+              </Link>
+            </div>
+          </Col>
+          <Col lg="3">
+            <div className="box-shad">
               <Link to="/UploadVideo" style={{ textDecoration: "none" }}>
                 <div>
                   <button

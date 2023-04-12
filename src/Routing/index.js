@@ -12,12 +12,14 @@ import UpdatePassword from '../Screens/UpdatePassword'
 import UploadDailySale from '../Screens/UploadDailySale'
 import UploadVideo from '../Screens/UploadVideo'
 import Signup from '../Screens/Signup'
+import Profile from '../Screens/Profile'
 const Routing = () => {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Login />} />
                 <Route path='Dashboard' element={<Dashboard />} />
+                <Route path='Profile' element={<Profile />} />
                 <Route path='UploadVideo' element={<UploadVideo />} />
                 <Route path='ScheduledVideoList' element={<ScheduledVideoList />} />
                 <Route path='PushNotification' element={<PushNotification />} />
