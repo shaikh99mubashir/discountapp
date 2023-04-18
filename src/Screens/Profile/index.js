@@ -75,6 +75,12 @@ const Profile = () => {
         )
       })}
     </div>
+    <div style={{marginTop:20}}>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+  <input type="file" name="image"/>
+  <button type="submit">Upload</button>
+</form>
+    </div>
     </>
   )
 }
