@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Col, Container, Image, Row } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
+import { BaseUrl } from "../../BaseUrl";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,16 +16,11 @@ const Login = () => {
 
   const loginBtnClicked = () => {
     axios
-      .post("http://localhost:5000/login", loginData)
+      .post(`${BaseUrl}login`, loginData)
       .then((success) => {
-        console.log("success", success.data);
-        if(success.data.status){
-            alert(success.data.message)
+            alert('Login Sucessfully')
             navigate('Dashboard')
-          }
-          else{
-            alert(success.data.message)
-          }
+          
         setLoginData(initialData);
       })
       .catch((error) => {
@@ -51,7 +47,7 @@ const Login = () => {
                       className="switch__description description"
                       style={{ color: "#d47617" }}
                     >
-                      When Money Talks, You Should Listen!
+                     To your Resturant
                     </p>
                   </div>
                 </div>

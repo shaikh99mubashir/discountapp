@@ -28,7 +28,7 @@ const Dashboard = () => {
         <Row>
           <Col lg="3">
             <div className="box-shad">
-              <Link to="/Dashboard" style={{ textDecoration: "none" }}>
+              <Link to="/AddCategory" style={{ textDecoration: "none" }}>
                 <div>
                   <button
                     className="sliderButton"
@@ -42,13 +42,82 @@ const Dashboard = () => {
                     }}
                   >
                     <RxDashboard id="sliderIcon" color="white" size={40} />
-                    <span style={{ fontSize: 20 }}>Dashboard</span>{" "}
+                    <span style={{ fontSize: 20 }}>Add Category</span>{" "}
+                  </button>
+                </div>
+              </Link>
+            </div>
+          </Col>
+        {/* <Row> */}
+        
+          
+          <Col lg="3">
+            <div className="box-shad">
+              <Link to="/AddProduct" style={{ textDecoration: "none" }}>
+                <div>
+                  <button
+                    className="sliderButton"
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      alignItems: "flex-start",
+                      alignItems: "center",
+                      gap: 10,
+                      borderRadius: 5,
+                    }}
+                  >
+                    <RxDashboard id="sliderIcon" color="white" size={40} />
+                    <span style={{ fontSize: 20 }}>Add Product</span>{" "}
                   </button>
                 </div>
               </Link>
             </div>
           </Col>
           <Col lg="3">
+            <div className="box-shad">
+              <Link to="/Categories" style={{ textDecoration: "none" }}>
+                <div>
+                  <button
+                    className="sliderButton"
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      alignItems: "flex-start",
+                      alignItems: "center",
+                      gap: 10,
+                      borderRadius: 5,
+                    }}
+                  >
+                    <RxDashboard id="sliderIcon" color="white" size={40} />
+                    <span style={{ fontSize: 20 }}>Categories</span>{" "}
+                  </button>
+                </div>
+              </Link>
+            </div>
+          </Col>
+          <Col lg="3">
+            <div className="box-shad">
+              <Link to="/Products" style={{ textDecoration: "none" }}>
+                <div>
+                  <button
+                    className="sliderButton"
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      alignItems: "flex-start",
+                      alignItems: "center",
+                      gap: 10,
+                      borderRadius: 5,
+                    }}
+                  >
+                    <RxDashboard id="sliderIcon" color="white" size={40} />
+                    <span style={{ fontSize: 20 }}>Products</span>{" "}
+                  </button>
+                </div>
+              </Link>
+            </div>
+          </Col>
+          {/* <Col lg="3">
             <div className="box-shad">
               <Link to="/Profile" style={{ textDecoration: "none" }}>
                 <div>
@@ -245,7 +314,7 @@ const Dashboard = () => {
                 </div>
               </Link>
             </div>
-          </Col>
+          </Col> */}
         </Row>
       </Container>
     </>

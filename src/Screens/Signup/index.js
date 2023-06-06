@@ -10,24 +10,25 @@ import { Link, useNavigate } from "react-router-dom";
 import { Col, Container, Image, Row } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
+import { BaseUrl } from "../../BaseUrl";
 
 const Signup = () => {
   const initialData ={
-    first_name:'',
-    phone_number:'',
+    name:'',
     email:'',
     password:'',
-    is_approved:false
   }
   const [signupData, setSignupData] = useState(initialData);
+  console.log('signupData',signupData);
   const navigate = useNavigate()
 
   const signUpBtnClicked = () => {
     axios
-      .post("http://localhost:5000/signup",signupData)
+      .post(`${BaseUrl}register`,signupData)
       .then((success) => {
         if(success.data.status){
-          alert(success.data.message)
+          // alert(success.data.message)
+          alert('signUp Sucessfully')
           navigate('/')
         }
         else{
@@ -59,7 +60,7 @@ const Signup = () => {
                       className="switch__description description"
                       style={{ color: "#d47617" }}
                     >
-                      When Money Talks, You Should Listen!
+                      To Resturant!
                     </p>
                   </div>
                 </div>
@@ -74,11 +75,11 @@ const Signup = () => {
                     className="form__input"
                     type="email"
                     placeholder="Name"
-                    value={signupData.first_name}
-                    onChange={(e) => setSignupData({...signupData, first_name:e.target.value})}
+                    value={signupData.name}
+                    onChange={(e) => setSignupData({...signupData, name:e.target.value})}
                   />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                {/* <Form.Group className="mb-3" controlId="formBasicEmail">
                   <input
                     className="form__input"
                     type="number"
@@ -86,7 +87,7 @@ const Signup = () => {
                     value={signupData.phone_number}
                     onChange={(e) => setSignupData({...signupData, phone_number:e.target.value})}
                   />
-                </Form.Group>
+                </Form.Group> */}
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <input
                     className="form__input"

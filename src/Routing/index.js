@@ -13,12 +13,20 @@ import UploadDailySale from '../Screens/UploadDailySale'
 import UploadVideo from '../Screens/UploadVideo'
 import Signup from '../Screens/Signup'
 import Profile from '../Screens/Profile'
+import AddCategory from '../Screens/AddCategory'
+import AddProduct from '../Screens/AddProduct'
+import Categories from '../Screens/Categories'
+import Products from '../Screens/Products'
 const Routing = () => {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Login />} />
                 <Route path='Dashboard' element={<Dashboard />} />
+                <Route path='AddCategory' element={<AddCategory />} />
+                <Route path='AddProduct' element={<AddProduct />} />
+                <Route path='Categories' element={<Categories />} />
+                <Route path='Products' element={<Products />} />
                 <Route path='Profile' element={<Profile />} />
                 <Route path='UploadVideo' element={<UploadVideo />} />
                 <Route path='ScheduledVideoList' element={<ScheduledVideoList />} />
