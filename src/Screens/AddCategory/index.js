@@ -17,7 +17,7 @@ const AddCategory = () => {
   const handleFileInputChange = async (event) => {
     try {
       const selectedFile = event.target.files[0];
-
+      console.log('selectedFile',selectedFile);
       const formData = new FormData();
       formData.append("category-image", selectedFile);
 
@@ -32,7 +32,7 @@ const AddCategory = () => {
         .then((response) => {
           setCategoryData({
             ...categoryData,
-            category_image: response.data.image,
+            category_image: `category/${response.data.image}`,
           });
         })
         .catch((error) => {

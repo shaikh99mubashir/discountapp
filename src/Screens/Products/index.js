@@ -47,7 +47,7 @@ const Products = () => {
               <td>{product.product_id}</td>
               <td>
                 <img
-                  src={`http://localhost:3000/${product.product_image}`}
+                  src={require('../../Images/biryani.jpg')}
                   alt="product Image"
                   style={{ height: "50px", width: "50px" }}
                 />

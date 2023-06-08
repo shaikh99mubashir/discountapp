@@ -17,6 +17,9 @@ import AddCategory from '../Screens/AddCategory'
 import AddProduct from '../Screens/AddProduct'
 import Categories from '../Screens/Categories'
 import Products from '../Screens/Products'
+import Resturant from '../Screens/Resturant'
+import Cart from '../Screens/Cart'
+import Checkout from '../Screens/Checkout'
 const Routing = () => {
     return (
         <BrowserRouter>
@@ -27,6 +30,9 @@ const Routing = () => {
                 <Route path='AddProduct' element={<AddProduct />} />
                 <Route path='Categories' element={<Categories />} />
                 <Route path='Products' element={<Products />} />
+                <Route path='Cart' element={<Cart />} />
+                <Route path='Checkout' element={<Checkout />} />
+                <Route path='Resturant' element={<Resturant />} />
                 <Route path='Profile' element={<Profile />} />
                 <Route path='UploadVideo' element={<UploadVideo />} />
                 <Route path='ScheduledVideoList' element={<ScheduledVideoList />} />

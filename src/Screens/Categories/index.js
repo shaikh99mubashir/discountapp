@@ -44,7 +44,7 @@ const Categories = () => {
               <td>{category.category_id}</td>
               <td>
                 <img
-                  src={`http://localhost:3000/v1/auth/${category.category_image}`}
+                  src={require('../../Images/biryani.jpg')}
                   alt="Category Image"
                   style={{ height: "50px", width: "50px" }}
                 />
